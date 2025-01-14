@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematinės formulės, laikrodis ir kontaktinė forma</title>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.8;
+        }
+        #laikrodis {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+        .formos-konteineris {
+            margin-top: 30px;
+        }
+        .formos-konteineris input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        #rezultatai {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Laikrodis -->
+    <h2>laikrodis</h2>
+    <div id="laikrodis">Įkeliama dabartinė data...</div>
+
+    <!-- MathML Formulės -->
+    <h2>Matematinės formulės</h2>
+    <h3>Sudėtingos funkcijos formulė</h3>
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+        <mrow>
+            <mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo>
+            <mo>=</mo>
+            <mfrac>
+                <mn>1</mn>
+                <mrow>
+                    <mn>2</mn><mi>&#x3C0;</mi><mi>i</mi>
+                </mrow>
+            </mfrac>
+            <mo>&#x222E;</mo>
+            <mfrac>
+                <mrow>
+                    <mi>f</mi><mo>(</mo><mi>z</mi><mo>)</mo>
+                </mrow>
+                <mrow>
+                    <mi>z</mi><mo>&#x2212;</mo><mi>a</mi>
+                </mrow>
+            </mfrac>
+            <mo>d</mo><mi>z</mi>
+        </mrow>
+    </math>
+
+    <h3>Standartinio nuokrypio formulė</h3>
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+        <mrow>
+            <mi>&#x3C3;</mi>
+            <mo>=</mo>
+            <msqrt>
+                <mfrac>
+                    <mn>1</mn>
+                    <mi>N</mi>
+                </mfrac>
+                <mrow>
+                    <munderover>
+                        <mo>&#x2211;</mo>
+                        <mrow>
+                            <mi>i</mi><mo>=</mo><mn>1</mn>
+                        </mrow>
+                        <mi>N</mi>
+                    </munderover>
+                    <mo>(</mo>
+                    <msup><mi>x</mi><mi>i</mi></msup>
+                    <mo>&#x2212;</mo><mi>&#x3BC;</mi>
+                    <mo>)</mo>
+                    <msup><mo>)</mo><mn>2</mn></msup>
+                </mrow>
+            </msqrt>
+        </mrow>
+    </math>
+
+    <h3>Divergencijos teorema</h3>
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+        <mrow>
+            <mo>&#x222E;</mo>
+            <mi>D</mi>
+            <mo>(</mo><mo>&#x2207;</mo><mo>&#xB7;</mo><mi>F</mi><mo>)</mo>
+            <mo>d</mo><mi>V</mi>
+            <mo>=</mo>
+            <mo>&#x222E;</mo>
+            <mi>&#x2202;</mi><mi>D</mi>
+            <mi>F</mi><mo>&#xB7;</mo><mi>n</mi><mo>d</mo><mi>S</mi>
+        </mrow>
+    </math>
+
+    <!-- Kontaktinė Forma -->
+    <h2>Kontaktinė forma</h2>
+    <div class="formos-konteineris">
+        <label for="vardas">Vardas:</label>
+        <input type="text" id="vardas">
+
+        <label for="pavarde">Pavardė:</label>
+        <input type="text" id="pavarde">
+
+        <label for="elpastas">El. paštas:</label>
+        <input type="email" id="elpastas">
+
+        <label for="telefonas">Telefono numeris:</label>
+        <input type="tel" id="telefonas">
+
+        <label for="adresas">Adresas:</label>
+        <input type="text" id="adresas">
+
+        <label for="laukas1">Papildomas laukas 1 (skaičius):</label>
+        <input type="number" id="laukas1">
+
+        <label for="laukas2">Papildomas laukas 2 (skaičius):</label>
+        <input type="number" id="laukas2">
+
+        <label for="laukas3">Papildomas laukas 3 (skaičius):</label>
+        <input type="number" id="laukas3">
+
+        <label for="laukas4">Papildomas laukas 4 (skaičius):</label>
+        <input type="number" id="laukas4">
+
+        <label for="laukas5">Papildomas laukas 5 (skaičius):</label>
+        <input type="number" id="laukas5">
+
+        <button id="pateikti">Pateikti</button>
+    </div>
+
+    <div id="rezultatai"></div>
+
+    <script>
+        // Laikrodžio funkcionalumas
+        function atnaujintiLaikrodi() {
+            const laikrodisElementas = document.getElementById('laikrodis');
+            const dabar = new Date();
+            const valandos = String(dabar.getHours()).padStart(2, '0');
+            const minutes = String(dabar.getMinutes()).padStart(2, '0');
+            const sekundes = String(dabar.getSeconds()).padStart(2, '0');
+            laikrodisElementas.textContent = `${valandos}:${minutes}:${sekundes}`;
+        }
+        setInterval(atnaujintiLaikrodi, 1000);
+        atnaujintiLaikrodi();
+
+        // Kontaktinės formos funkcionalumas
+        document.getElementById('pateikti').addEventListener('click', () => {
+            const formosDuomenys = {
+                vardas: document.getElementById('vardas').value,
+                pavarde: document.getElementById('pavarde').value,
+                elpastas: document.getElementById('elpastas').value,
+                telefonas: document.getElementById('telefonas').value,
+                adresas: document.getElementById('adresas').value,
+                papildomiLaukai: [
+                    parseFloat(document.getElementById('laukas1').value),
+                    parseFloat(document.getElementById('laukas2').value),
+                    parseFloat(document.getElementById('laukas3').value),
+                    parseFloat(document.getElementById('laukas4').value),
+                    parseFloat(document.getElementById('laukas5').value)
+                ]
+            };
+
+            console.log(formosDuomenys);
+
+            const rezultatuDiv = document.getElementById('rezultatai');
+            rezultatuDiv.innerHTML = `
+                <p>Vardas: ${formosDuomenys.vardas}</p>
+                <p>Pavardė: ${formosDuomenys.pavarde}</p>
+                <p>El. paštas: ${formosDuomenys.elpastas}</p>
+                <p>Telefonas: ${formosDuomenys.telefonas}</p>
+                <p>Adresas: ${formosDuomenys.adresas}</p>
+                <p>Papildomas laukas 1: ${formosDuomenys.papildomiLaukai[0]}</p>
+                <p>Papildomas laukas 2: ${formosDuomenys.papildomiLaukai[1]}</p>
+                <p>Papildomas laukas 3: ${formosDuomenys.papildomiLaukai[2]}</p>
+                <p>Papildomas laukas 4: ${formosDuomenys.papildomiLaukai[3]}</p>
+                <p>Papildomas laukas 5: ${formosDuomenys.papildomiLaukai[4]}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
